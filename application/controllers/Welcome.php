@@ -25,7 +25,7 @@ class Welcome extends CI_Controller
 		$res = $this->Batch_model->get_batch();
 		$result['data'] = $res;
 
-		// $this->load->view('home', $result);
-		$this->load->view('login');
+		$this->load->view('home', $result);
+		// $this->load->view('login');
 	}
 }

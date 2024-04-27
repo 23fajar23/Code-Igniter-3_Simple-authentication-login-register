@@ -83,7 +83,7 @@ class AuthController extends CI_Controller
 					);
 
 					$this->session->set_userdata('UserLoginSession', $session_data);
-					redirect('dashboard_user');
+					redirect('dashboard');
 				}else{
 					$this->session->set_flashdata('error', 'Username or Password is wrong');
 					redirect('login');
@@ -106,7 +106,17 @@ class AuthController extends CI_Controller
 		if (!$sesssion_status) {
 			$this->load->view('login');
 		}else{
-			redirect('dashboard_user');
+			redirect('dashboard');
+		}
+	}
+
+	public function page_register()
+	{
+		$sesssion_status = $this->check_session();
+		if (!$sesssion_status) {
+			$this->load->view('register');
+		}else{
+			redirect('dashboard');
 		}
 	}
 
@@ -115,7 +125,7 @@ class AuthController extends CI_Controller
 		$sesssion_status = $this->check_session();
 		if ($sesssion_status) {
 			$session_data = $this->session->userdata('UserLoginSession');
-			$this->load->view('user/dashboard_user');
+			$this->load->view('user/dashboard');
 		}else{
 			redirect('login');
 		}
