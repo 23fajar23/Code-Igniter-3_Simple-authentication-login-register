@@ -98,20 +98,16 @@ class AuthController extends CI_Controller
 	public function logout(){
 		$this->session->sess_destroy();
 		redirect('login');
-		// redirect(base_url('authcontroller/page_login'));
 	}
 
 	public function page_login()
 	{
-		// $this->load->view('login');
-
-		// $sesssion_status = $this->check_session();
-		// if ($sesssion_status) {
-			// $session_data = $this->session->userdata('UserLoginSession');
-			// print_r( $this->session->userdata('UserLoginSession'));
-			// echo $session_data['username'];
+		$sesssion_status = $this->check_session();
+		if (!$sesssion_status) {
 			$this->load->view('login');
-		// }
+		}else{
+			redirect('dashboard_user');
+		}
 	}
 
 	public function page_user()
@@ -119,9 +115,9 @@ class AuthController extends CI_Controller
 		$sesssion_status = $this->check_session();
 		if ($sesssion_status) {
 			$session_data = $this->session->userdata('UserLoginSession');
-			// print_r( $this->session->userdata('UserLoginSession'));
-			// echo $session_data['username'];
 			$this->load->view('user/dashboard_user');
+		}else{
+			redirect('login');
 		}
 	}
 
@@ -130,7 +126,7 @@ class AuthController extends CI_Controller
 		if ($this->session->userdata('UserLoginSession')) {
 			return true;
 		}else{
-			$this->page_login();
+			return false;
 		}
 	}
 }
