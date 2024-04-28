@@ -90,10 +90,12 @@ class AuthController extends CI_Controller
 				if ($status != false) {
 					$username = $status->username;
 					$batch = $status->batch_id;
+					$role = $status->role_id;
 
 					$session_data = array(
 						'username' => $username,
-						'batch_id' => $batch
+						'batch_id' => $batch,
+						'role_id' => $role
 					);
 
 					$this->session->set_userdata('UserLoginSession', $session_data);
@@ -139,12 +141,20 @@ class AuthController extends CI_Controller
 		}
 	}
 
-	public function page_user()
+	public function dashboard()
 	{
 		$sesssion_status = $this->check_session();
 		if ($sesssion_status) {
 			$session_data = $this->session->userdata('UserLoginSession');
-			$this->load->view('user/dashboard');
+
+			$role = $this->db->get_where('role', array('id' => $session_data['role_id']));
+			if ($role->row()->name == "ROLE_USER") {
+				$this->load->view('user/dashboard');
+			}else if ($role->row()->name == "ROLE_ADMIN") {
+				$this->load->view('admin/dashboard');
+			}else if ($role->row()->name == "ROLE_CLIENT") {
+				$this->load->view('admin/dashboard');
+			}
 		}else{
 			redirect('login');
 		}
