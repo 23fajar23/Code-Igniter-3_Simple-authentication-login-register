@@ -23,23 +23,39 @@ class AuthController extends CI_Controller
 	public function register()
 	{
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$this->form_validation->set_rules('name', 'Input Name' ,'required');
+			$this->form_validation->set_rules('fullname', 'Input Name' ,'required');
 			$this->form_validation->set_rules('username', 'Input Username','required');
 			$this->form_validation->set_rules('password', 'Input Password','required');
-			// $this->form_validation->set_rules('batch', 'required');
+			$this->form_validation->set_rules('confirm-password', 'Input Confirm Password','required');
+			$this->form_validation->set_rules('batch', 'Input Batch','required');
+
+			$valid_password = true;
+
+			if ($this->input->post('password') != $this->input->post('confirm-password')) {
+				$valid_password = false;
+				$this->session->set_flashdata('error', 'Validation password do not match');
+				redirect('register');
+			}
 
 			if ($this->form_validation->run() == TRUE) {
-				$name = $this->input->post('name');
+				$name = $this->input->post('fullname');
 				$username = $this->input->post('username');
 				$password = $this->input->post('password');
-				$batch = $this->input->post('batch');
+				// $batch = $this->input->post('batch');
+				$batch = $this->db->get_where('batch', array('id' => $this->input->post('batch')));
 				$role = $this->db->get_where('role', array('name' => 'ROLE_USER'));
+
+				if (!$batch->row()->id) {
+					$this->session->set_flashdata('error', 'Batch is required');
+					redirect('register');
+				}
+				//Save Data
 
 				$data = array(
 					'name' => $name,
 					'username' => $username,
 					'password' => sha1($password),
-					'batch_id' => $batch,
+					'batch_id' => $batch->row()->id,
 					'role_id'  => $role->row()->id
 				);
 
@@ -47,15 +63,13 @@ class AuthController extends CI_Controller
 				$save = $this->user_model->register_user($data);
 				$this->session->set_flashdata('success', 'Successfully Register');
 				
-				redirect(base_url('welcome/index'));
+				redirect('login');
 			}else{
-				echo "gagal";
+				$this->session->set_flashdata('error', 'ga tau');
+				redirect('register');
 			}
-
-			echo "s";
 		}else{
-			redirect(base_url('welcome/index'));
-
+			redirect('register');
 		}
 	}
 
@@ -114,7 +128,12 @@ class AuthController extends CI_Controller
 	{
 		$sesssion_status = $this->check_session();
 		if (!$sesssion_status) {
-			$this->load->view('register');
+
+			$this->load->model('Batch_model');
+			$res = $this->Batch_model->get_batch();
+			$result['data'] = $res;
+
+			$this->load->view('register', $result);
 		}else{
 			redirect('dashboard');
 		}
