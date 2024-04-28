@@ -25,7 +25,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
+				<div style="margin-top:60px;" class="login100-pic js-tilt" data-tilt>
 					<img src="assets/auth/images/img-01.png" alt="IMG">
 				</div>
 

@@ -62,11 +62,11 @@
 						</button>
 					</div>
 
-					<div class="text-center p-t-12" onclick="myFunction('Please contact admin !')">
+					<div class="text-center p-t-12 text-white" >
 						<span class="txt1">
 							Forgot
 						</span>
-						<a class="txt2" href="#">
+						<a class="txt2" onclick="myFunction('Please contact admin !')">
 							Username / Password?
 						</a>
 					</div>
