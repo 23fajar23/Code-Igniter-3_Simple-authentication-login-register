@@ -40,6 +40,33 @@ This project was created using several software including
 - Microsoft edge, Firefox -> for testing and debugging in project creation
 - Framework Code Igniter 3 -> PHP framework used in creating websites
 
+Here's a brief overview of what this project looks like
+
+
+<table width="90%" border=0 align="center">
+    <tr>
+        <td align="center" colspan=3>
+        ~~ Login & Register Preview ~~
+        </td>
+    </tr>
+    <tr align="center" >
+        <td>
+            <br>
+                <img width="100%" alt="screen shot 2017-08-07 at 12 18 15 pm" src="image/login.jpeg" style="border-radius:10px">
+            </br>
+        </td>
+    </tr>
+    <tr align="center" >
+        <td colspan=2>
+            <br>
+                <img width="100%" alt="screen shot 2017-08-07 at 12 18 15 pm" src="image/register.jpeg" style="border-radius:10px">
+            </br>
+        </td>
+    </tr>
+</table>
+
+<br>
+
 Those are some previews of what this project is like, hopefully this project can help you. 😄🙏✨<br>
 See you next time.. ✌✌
 
