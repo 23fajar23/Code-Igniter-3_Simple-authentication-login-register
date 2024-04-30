@@ -2,7 +2,7 @@
 
 <img src="https://cdn.freebiesupply.com/logos/large/2x/codeigniter-logo-png-transparent.png" width="250"> 
     
-## ✨ ~ Simple authentication login register with authority in code igniter 3  ~ ✨
+## ✨ Simple authentication login register with authority in code igniter 3  ✨
 
 </p>
 
@@ -12,7 +12,7 @@ Now I want to share an example of the Igniter 3 code project with you, where thi
 
 ## Step after your clone this project :
 
-- create a new database with the name "placement" then import the placement.sql file in folder "Database".
+- Create a new database with the name "placement" then import the placement.sql file in folder "Database".
 - Then rename the project folder to "placement"
 - Move folder "placement" to your localhost
 - Open your project file and open file database.php located in the <b> application->config folder.</b>
